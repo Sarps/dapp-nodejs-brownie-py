@@ -1,0 +1,20 @@
+{
+  "name": "dapp-nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sol-compile": "solcjs --abi --bin --include-path node_modules/ -p -o bin --base-path contracts contracts/Main.sol",
+    "start": "node ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "solc": "^0.8.13",
+    "truffle": "^5.5.10",
+    "web3": "^1.7.3"
+  }
+}
