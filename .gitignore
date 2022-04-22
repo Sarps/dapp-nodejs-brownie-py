@@ -3,5 +3,10 @@
 
 bin
 node_modules
-
 .env
+
+__pycache__
+.history
+.hypothesis/
+build/
+reports/

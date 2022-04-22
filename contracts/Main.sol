@@ -27,4 +27,8 @@ contract Main {
         return address(this).balance;
     }
 
+    function ownerBalance() public view ownerAccount returns(uint256) {
+        return address(owner).balance;
+    }
+
 }

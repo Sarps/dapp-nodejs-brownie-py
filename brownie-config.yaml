@@ -1,0 +1,3 @@
+dotenv: .env
+wallets:
+    key: ${ETH_ACCOUNT_PRIVATE_KEY}
