@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "sol-compile": "solcjs --abi --bin --include-path node_modules/ -p -o bin --base-path contracts contracts/Main.sol",
+    "solc": "solcjs --abi --bin --include-path node_modules/ -p -o bin --base-path contracts contracts/Main.sol",
+    "dev:solc": "nodemon -e sol --exec \"npm run solc\" --config @solc",
     "start": "node ."
   },
   "keywords": [],
@@ -16,5 +17,8 @@
     "solc": "^0.8.13",
     "truffle": "^5.5.10",
     "web3": "^1.7.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }

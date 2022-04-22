@@ -1,0 +1,10 @@
+{
+    "tasks": {
+        "solc": {
+            "watch": "contracts/*.sol"
+        },
+        "deploy-sol": {
+
+        }
+    }
+}

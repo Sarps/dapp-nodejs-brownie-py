@@ -5,23 +5,25 @@ const fs = require("fs");
 
 const web3 = new Web3(new Web3.providers.HttpProvider(process.env.WEB3_HTTP_PROVIDER));
 
-const bytecode = fs.readFileSync('bin/Main_sol_Main.bin', {encoding: 'utf-8'})
-const abi = JSON.parse(fs.readFileSync('bin/Main_sol_Main.abi', {encoding: 'utf-8'}))
+const loadSol = (sol = "Main", contract = "Main") => {
+    const bytecode = fs.readFileSync(`bin/${sol}_sol_${contract}.bin`, {encoding: 'utf-8'})
+    const abi = JSON.parse(fs.readFileSync(`bin/${sol}_sol_${contract}.abi`, {encoding: 'utf-8'}))
+    return {bytecode, abi}
+}
 
-const MainContract = new web3.eth.Contract(abi)
-MainContract.deploy({data: bytecode})
-    .send({
-        from: '0x52d9806D0f35a2bb3abC2d99e5C97A7a1da8267f',
-        gas: 1500000,
-        gasPrice: web3.utils.toWei('0.00003', 'ether')
-    })
-    .then(instance => {
-        MainContract.options.address = instance.options.address
-        web3.eth.accounts.signTransaction({
+const deploy = async ({bytecode, abi}) => {
+    const MainContract = await (new web3.eth.Contract(abi))
+        .deploy({data: bytecode})
+        .send({
             from: process.env.ETH_ACCOUNT_ADDRESS,
-        }, process.env.ETH_ACCOUNT_PRIVATE_KEY)
+            gas: +process.env.ETH_TXN_GAS,
+            gasPrice: web3.utils.toWei('0.00003', 'ether')
+        });
 
-        // contract.methods.fund
-        console.log(MainContract)
-    });
+    return MainContract;
+}
+
+deploy(loadSol()).then(contract => {
+    console.log(contract.methods.balance())
+})
 

@@ -3,8 +3,6 @@
 
 pragma solidity ^0.8.0;
 
-import "Ballot.sol";
-
 contract Main {
 
     mapping(address => uint256) public payments;
@@ -23,6 +21,10 @@ contract Main {
 
     function withdraw() public payable ownerAccount {
         payable(owner).transfer(address(this).balance);
+    }
+
+    function balance() public view ownerAccount returns(uint256) {
+        return address(this).balance;
     }
 
 }
